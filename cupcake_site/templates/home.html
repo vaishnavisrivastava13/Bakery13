@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cupcake Bakery</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #ffb3c6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #7a003c;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #7a003c;
+            font-weight: bold;
+        }
+
+        /* MOBILE MENU */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background: #ffb3c6;
+                width: 100%;
+                padding: 20px;
+            }
+            nav ul.open {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+                font-size: 30px;
+                cursor: pointer;
+                color: #7a003c;
+            }
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1499636136210-6f4ee915583e') center/cover no-repeat;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            background: #ff4d79;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .service-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #ccc;
+            background: #fff;
+        }
+    </style>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector("nav ul").classList.toggle("open");
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">Cupcake Bakery</div>
+
+        <span class="menu-btn" onclick="toggleMenu()">☰</span>
+
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/menu/">Menu</a></li>
+            <li><a href="/orders/">Order</a></li>
+            <li><a href="/gallery/">Gallery</a></li>
+            <li><a href="/team/">Team</a></li>
+            <li><a href="/contact/">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <div>
+            <h1>Fresh Cupcakes Everyday</h1>
+            <p>Love made with sugar, cream & happiness 🍰</p>
+            <a href="/menu/" class="btn">Explore Menu</a>
+        </div>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div class="services">
+        <h2>Our Specialities</h2>
+
+        <div class="service-box">
+            <div class="card">
+                <h3>Custom Cakes</h3>
+                <p>We design beautiful birthday & wedding cakes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Fresh Cupcakes</h3>
+                <p>Vanilla, chocolate, strawberry & more!</p>
+            </div>
+
+            <div class="card">
+                <h3>Fast Delivery</h3>
+                <p>Get your sweets delivered fresh & fast.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
