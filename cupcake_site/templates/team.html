@@ -1,10 +1,339 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sweets Cupcake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <ul class="nav-left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Order</a></li>
+        </ul>
+
+        <div class="nav-logo">
+            <img src="{% static 'img/logo.png' %}" alt="Logo">
+        </div>
+
+        <ul class="nav-right">
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Gifting</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+
+<!-- ================= SLIDER / HERO ================= -->
+
+<section class="slider">
+    <div class="slider-overlay"></div>
+
+    <div class="slider-content">
+        <h1>We Implement Your<br>Delicious Dreams...</h1>
+
+        <div class="slider-images">
+            <img src="{% static 'img/cupcake1.png' %}" class="slide" alt="Cupcake">
+            <img src="{% static 'img/cupcake2.png' %}" class="slide" alt="Cupcake">
+            <img src="{% static 'img/cupcake3.png' %}" class="slide" alt="Cupcake">
+        </div>
+
+        <!-- ARROWS -->
+        <div class="arrow left">&#10094;</div>
+        <div class="arrow right">&#10095;</div>
+    </div>
+</section>
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+    <div class="card">
+        <h3>🚴 Delivery</h3>
+        <p>Only 30 minutes</p>
+        <button>Read More</button>
+    </div>
+
+    <div class="card">
+        <h3>🎁 Package</h3>
+        <p>Free</p>
+        <button>Read More</button>
+    </div>
+
+    <div class="card">
+        <h3>💸 Discount 15%</h3>
+        <p>Opening Offer</p>
+        <button>Read More</button>
+    </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+
+<section class="team">
+    <h2>Our Team</h2>
+
+    <div class="team-box">
+
+        <div class="member">
+            <img src="{% static 'img/team1.jpg' %}" alt="Team">
+            <h4>Vaishnavi Prakash</h4>
+            <p>Founder & CEO</p>
+        </div>
+
+        <div class="member">
+            <img src="{% static 'img/team2.jpg' %}" alt="Team">
+            <h4>Manideepa Sharma</h4>
+            <p>Chef</p>
+        </div>
+
+        <div class="member">
+            <img src="{% static 'img/team3.jpg' %}" alt="Team">
+            <h4>Vaishnavi</h4>
+            <p>Designer</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+    <p>© 2025 Sweets Cupcake. All Rights Reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="{% static 'js/slider.js' %}"></script>
 </body>
 </html>
+
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #fff;
+}
+
+/* ================= NAVBAR ================= */
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: #ffffff;          /* WHITE BACKGROUND */
+    padding: 35px 0 80px;
+    position: relative;
+}
+
+/* WAVY BOTTOM */
+.navbar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background:
+        radial-gradient(circle at 30px 0,
+        transparent 30px,
+        #ffffff 31px);
+    background-size: 60px 60px;
+}
+
+/* CONTAINER */
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* MENU */
+.nav-left,
+.nav-right {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+/* NAV LINKS – CONTRAST COLOR */
+.nav-left a,
+.nav-right a {
+    text-decoration: none;
+    color: #d94f70;        /* PINK CONTRAST */
+    font-size: 17px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-left a:hover,
+.nav-right a:hover {
+    color: #6b2d2d;
+}
+
+/* LOGO */
+.nav-logo img {
+    width: 130px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ================= SLIDER ================= */
+/* ================= SLIDER ================= */
+
+.slider {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(to right, #f4b6c2, #f8d7de);
+    overflow: hidden;
+}
+
+/* dark overlay for text clarity */
+.slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+}
+
+/* content over background */
+.slider-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.slider-content h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+
+/* slider images */
+.slider-images {
+    width: 700px;
+    height: 500px;
+}
+
+.slide {
+    display: none;
+    width: 260px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* arrows */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    padding: 10px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.arrow.left {
+    left: 30px;
+}
+
+.arrow.right {
+    right: 30px;
+}
+
+
+/* ================= FOOTER ================= */
+footer {
+    background: #f08aa0;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .slider-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .slider-images {
+        margin-top: 30px;
+    }
+}
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .team-box {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const nextBtn = document.querySelector(".arrow.right");
+const prevBtn = document.querySelector(".arrow.left");
+
+function showSlide(index) {
+    slides.forEach(slide => slide.style.display = "none");
+    slides[index].style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentSlide++;
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+    showSlide(currentSlide);
+});
+
+prevBtn.addEventListener("click", () => {
+    currentSlide--;
+    if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+    }
+    showSlide(currentSlide);
+});
+
+// auto slide
+setInterval(() => {
+    currentSlide++;
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+    showSlide(currentSlide);
+}, 3000);
+
+showSlide(currentSlide);
