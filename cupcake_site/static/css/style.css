@@ -1,3 +1,4 @@
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,115 +6,186 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* NAVBAR */
-.navbar {
-    background: white;
+/* ================= NAVBAR ================= */
+.main-navbar {
+    background: #ffffff;
+    position: relative;
+    z-index: 20;
+}
+
+/* NAV CONTAINER */
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 0 55px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    padding: 30px;
+    justify-content: space-between;
     position: relative;
 }
 
-.navbar::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    background: radial-gradient(circle at 25px 0, transparent 25px, white 26px);
-    background-size: 50px 50px;
-}
-
-.nav-left, .nav-right {
+/* MENU */
+.nav-left,
+.nav-right {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 30px;
+    margin: 0 120px;
+    position: relative;
+    z-index: 50;
 }
 
-.navbar a {
+/* NAV LINKS */
+.nav-left li a,
+.nav-right li a {
     text-decoration: none;
-    color: #d94f70;
+    color: #c94b6b;
     font-weight: 600;
+    font-size: 20px;
+    position: relative;
+    z-index: 60;
+}
+
+/* ================= HOVER EFFECT ================= */
+.nav-left li a:hover,
+.nav-right li a:hover {
+    color: #e91e63;
+}
+
+/* Underline (hover + active) */
+.nav-left li a::after,
+.nav-right li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background-color: #e91e63;
+    transition: width 0.3s ease;
+}
+
+/* Hover underline */
+.nav-left li a:hover::after,
+.nav-right li a:hover::after {
+    width: 100%;
+}
+
+/* Active page */
+.main-navbar a.active {
+    color: #e91e63;
+}
+
+.main-navbar a.active::after {
+    width: 100%;
+}
+
+/* LOGO */
+.nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+    z-index: 10;
 }
 
 .nav-logo img {
-    width: 120px;
+    width: 180px;
+    padding: 12px;
+    background: white;
     border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* BOOTSTRAP CAROUSEL SLIDER */
+/* ================= NAVBAR WAVE ================= */
+.navbar-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+}
 
+.navbar-wave svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+}
+
+
+/* ================= SLIDER ================= */
 .slider {
-    background: linear-gradient(to right, #f4b6c2, #f8d7de);
-    padding: 100px 0;
+    margin-top: -60px; /* overlap wave */
+    position: relative;
+    z-index: 1;
 }
 
-.carousel-content {
+/* SLIDE BACKGROUND */
+.bg-slide {
+    height: 520px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* TEXT OVERLAY */
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    text-align: left;
-}
-
-.carousel-content h1 {
-    font-family: 'Pacifico', cursive;
-    color: white;
-    font-size: 42px;
-}
-
-.carousel-img {
-    width: 320px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-/* center on mobile */
-@media (max-width: 768px) {
-    .carousel-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .carousel-img {
-        margin-top: 20px;
-        width: 260px;
-    }
-}
-
-/* FEATURES */
-.features {
-    display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 60px;
+    text-align: center;
 }
 
+.carousel-overlay h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ffffff;
+    font-size: 44px;
+    line-height: 1.3;
+}
+
+/* ================= FEATURES ================= */
 .feature-card {
     background: #f6c1cd;
-    padding: 30px;
-    width: 220px;
-    text-align: center;
-    border-radius: 15px;
+    padding: 35px;
+    border-radius: 18px;
     color: white;
+    transition: 0.3s;
 }
 
-/* TEAM */
+.feature-card h3 {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+/* ================= TEAM ================= */
 .team {
     background: #fbe3e8;
-    padding: 60px;
+    padding: 70px 20px;
     text-align: center;
 }
 
 .team h2 {
     font-family: 'Pacifico', cursive;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    color: #c94b6b;
 }
 
 .team-box {
     display: flex;
     justify-content: center;
     gap: 40px;
+    flex-wrap: wrap;
+}
+
+.member {
+    width: 220px;
 }
 
 .member img {
@@ -122,11 +194,88 @@
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.member h4 {
+    margin-top: 15px;
+    color: #c94b6b;
+    font-weight: 600;
+}
+
+/* ================= FOOTER ================= */
 footer {
     background: #f08aa0;
     color: white;
     text-align: center;
     padding: 15px;
+    font-size: 14px;
 }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+    .nav-container {
+        flex-direction: column;
+        padding-bottom: 80px;
+    }
+
+    .nav-left,
+    .nav-right {
+        gap: 20px;
+    }
+
+    .nav-logo {
+        top: 60px;
+    }
+
+    .bg-slide {
+        height: 380px;
+    }
+
+    .carousel-overlay h1 {
+        font-size: 30px;
+    }
+
+    .team-box {
+        gap: 30px;
+    }
+}
+/* ================= NAVBAR HOVER EFFECT ================= */
+
+.nav-left li a,
+.nav-right li a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Hover color */
+.nav-left li a:hover,
+.nav-right li a:hover {
+    color: #e91e63;
+}
+
+/* Hover underline animation */
+.nav-left li a::after,
+.nav-right li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background-color: #e91e63;
+    transition: width 0.3s ease;
+}
+
+/* On hover show underline */
+.nav-left li a:hover::after,
+.nav-right li a:hover::after {
+    width: 100%;
+}
+
+/* Keep underline for active page */
+.main-navbar a.active::after {
+    width: 100%;
+}
+
