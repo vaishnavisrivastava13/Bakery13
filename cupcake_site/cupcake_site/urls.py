@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
-from home.views import home_page
+from home.views import home_page,signup,save_location
 from menu.views import menu_page
 from orders.views import order_page
 from contact.views import contact_page
@@ -28,6 +28,8 @@ from team.views import team_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page, name='home'),
+    path('signup/', signup, name='signup'),
+    path('save-location/', save_location, name='save_location'),
     path('menu/', menu_page, name='menu'),
     path('orders/', order_page, name='orders'),
     path('contact/', contact_page, name='contact'),
