@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ cake.name }} | Sweets Cupcake{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <img src="{{ cake.image.url }}" class="img-fluid rounded shadow">
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="fw-bold">{{ cake.name }}</h2>
+      <p class="fs-4 text-danger">₹{{ cake.price }}</p>
+
+      <p class="text-muted">
+        ⭐ {{ cake.rating }} / 5
+      </p>
+
+      <p>{{ cake.description }}</p>
+
+      <button class="btn btn-pink btn-lg mt-3">
+        Add to Cart
+      </button>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

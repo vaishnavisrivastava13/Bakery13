@@ -18,21 +18,30 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
-from home.views import home_page,signup,save_location
-from menu.views import menu_page
+from home.views import home_page,signup,save_location,login_view, logout_view,forgot_password,verify_otp
+from beverages.views import beverages
 from orders.views import order_page
 from contact.views import contact_page
-from gallery.views import gallery_page
-from team.views import team_page
+from cakes.views import cake_list,cake_detail
+from cupcakes.views import cupcakes
+from desert.views import desert
+from gift.views import gift
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page, name='home'),
     path('signup/', signup, name='signup'),
+    path('login/', login_view, name='login'),
+    path('forgot-password/',forgot_password, name='forgot_password'),
+    path('verify-otp/',verify_otp, name='verify_otp'),
+    path('logout/', logout_view, name='logout'),
     path('save-location/', save_location, name='save_location'),
-    path('menu/', menu_page, name='menu'),
+    path('beverages/', beverages, name='beverages'),
     path('orders/', order_page, name='orders'),
     path('contact/', contact_page, name='contact'),
-    path('gallery/', gallery_page, name='gallery'),
-    path('team/', team_page, name='team'),
+    path('cakes/', cake_list, name='cakes'),
+    path('<int:id>/', cake_detail, name='cake_detail'),
+    path('cupcakes/', cupcakes, name='cupcakes'),
+    path('desert/', desert, name='desert'),
+    path('gift/', gift, name='gift'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body style="background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins">
+
+<div style="background:#fff;padding:35px;width:360px;border-radius:20px;text-align:center;">
+    <h2 style="color:#e91e63;">Verify OTP 🔐</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="otp" placeholder="Enter OTP"
+               style="width:100%;padding:12px;border-radius:30px;border:1px solid #f3b5c8;margin-bottom:10px;">
+        <input type="password" name="password" placeholder="New Password"
+               style="width:100%;padding:12px;border-radius:30px;border:1px solid #f3b5c8;">
+        <button style="margin-top:20px;width:100%;padding:12px;border-radius:30px;
+        background:#e91e63;color:#fff;border:none;">
+            Reset Password
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

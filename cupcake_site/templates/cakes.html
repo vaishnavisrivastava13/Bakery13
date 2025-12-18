@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cakes | Sweets Cupcake{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <h2 class="fw-bold">Online Cake Delivery</h2>
+  <p class="text-muted">Home › Cakes</p>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar d-flex justify-content-between align-items-center p-3 mb-4 rounded shadow-sm">
+    <h4 class="mb-0">
+      Cakes
+      <span class="text-muted fs-6">({{ cakes.paginator.count }} items)</span>
+    </h4>
+  </div>
+
+  <!-- Cake Grid -->
+  <div class="row g-4">
+
+    {% for cake in cakes %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+      <div class="cake-card position-relative">
+
+        {% if cake.is_best_seller %}
+        <span class="badge best-seller">Best Seller</span>
+        {% endif %}
+
+        <!-- Wishlist Heart -->
+        <span class="wishlist"
+          data-id="{{ cake.id }}">
+          <i class="far fa-heart"></i>
+        </span>
+
+
+        <!-- Clickable Cake -->
+        <a href="{% url 'cake_detail' cake.id %}" class="cake-link">
+          <img src="{{ cake.image.url }}" alt="{{ cake.name }}">
+          <h6 class="cake-name">{{ cake.name }}</h6>
+        </a>
+
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- Pagination -->
+  <nav class="mt-5">
+    <ul class="pagination justify-content-center">
+
+      {% if cakes.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ cakes.previous_page_number }}">Previous</a>
+      </li>
+      {% endif %}
+
+      <li class="page-item active">
+        <span class="page-link">{{ cakes.number }}</span>
+      </li>
+
+      {% if cakes.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ cakes.next_page_number }}">Next</a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </nav>
+
+</div>
+
+<!-- Wishlist Toast -->
+<div id="wishlist-toast" class="wishlist-toast">
+  Item successfully added to wishlist
+</div>
+
+{% endblock %}

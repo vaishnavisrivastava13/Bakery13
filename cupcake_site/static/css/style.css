@@ -1,12 +1,22 @@
 /* ================= RESET ================= */
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
 /* ================= FIRST NAVBAR ================= */
+.welcome-text {
+    color: #e91e63;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
 .top-navbar {
     background: #fff;
     border-bottom: 1px solid #eee;
@@ -143,10 +153,27 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    transition: color 0.3s ease;
 }
 
-.category-menu a.active {
+/* Hover effect */
+.category-menu li:hover > a {
     color: #ff5a8a;
+}
+
+/* Active (clicked page) */
+.category-menu li.active > a {
+    color: #ff5a8a;
+    font-weight: 600;
+    border-bottom: 2px solid #ff5a8a;
+    transition: all 0.3s ease;
+}
+
+/* Dropdown show */
+.category-menu li:hover .mega-menu {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ================= DROPDOWN ================= */
@@ -157,6 +184,7 @@
 
 .mega-menu {
     display: none;
+    opacity:0;
     position: absolute;
     top: 42px;
     left: 0;
@@ -165,6 +193,8 @@
     padding: 20px;
     gap: 40px;
     min-width: 620px;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
 .menu-column h6 {
@@ -190,13 +220,8 @@
 
 
 /* ================= SLIDER ================= */
-.slider {
-    margin-top: -60px; /* overlap wave */
-    position: relative;
-    z-index: 1;
-}
 
-/* SLIDE BACKGROUND */
+
 .bg-slide {
     height: 520px;
     background-size: cover;
@@ -205,7 +230,12 @@
     position: relative;
 }
 
-/* TEXT OVERLAY */
+.carousel,
+.carousel-inner,
+.carousel-item {
+    height: 520px;
+}
+
 .carousel-overlay {
     position: absolute;
     inset: 0;
@@ -231,10 +261,14 @@
     color: white;
     transition: 0.3s;
 }
-
 .feature-card h3 {
     margin-top: 15px;
-    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    margin-top: 8px;
+    line-height: 1.4;
 }
 
 .feature-card:hover {
@@ -278,15 +312,6 @@
     margin-top: 15px;
     color: #c94b6b;
     font-weight: 600;
-}
-
-/* ================= FOOTER ================= */
-footer {
-    background: #f08aa0;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -354,5 +379,186 @@ footer {
 /* Keep underline for active page */
 .main-navbar a.active::after {
     width: 100%;
+}
+
+main {
+    padding-bottom: 40px;
+}
+
+/*FOOTER*/
+
+/* ================= FOOTER ================= */
+
+.footer {
+  background: linear-gradient(135deg, #ff9ebc, #ffb6c1);
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 35px;
+}
+
+.footer h3 {
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.footer h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Links */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  padding-left: 6px;
+  color: #fff;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: #ffffff;
+  color: #ff5a8a;
+  transform: translateY(-4px);
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+.footer-bottom span {
+  font-size: 16px;
+}
+
+/* cake.html */
+/* Filter Bar */
+.filter-bar {
+  background: #f7f7f7;
+  border-radius: 8px;
+}
+
+/* Cake Card */
+.cake-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.cake-card:hover {
+  transform: translateY(-8px);
+}
+
+.cake-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+/* Best Seller */
+.best-seller {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: green;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+/* Wishlist */
+.wishlist {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover Info */
+.cake-info {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background: rgba(255,182,193,0.95);
+  color: white;
+  text-align: center;
+  padding: 12px;
+  transition: 0.4s;
+}
+
+.cake-card:hover .cake-info {
+  bottom: 0;
+}
+
+/* Pink Button */
+.btn-pink {
+  background: #ff5a8a;
+  color: white;
+  border-radius: 20px;
 }
 
