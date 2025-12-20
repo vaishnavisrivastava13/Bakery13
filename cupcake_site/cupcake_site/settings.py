@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     'contact',
     'cakes',
     'cupcakes',
-    'desert',
+    'dessert',
     'gift',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart_quantity',
+
             ],
         },
     },

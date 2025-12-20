@@ -38,17 +38,20 @@
             <div class="form-group">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="text" name="phone" placeholder="Phone Number" required>
-
             </div>
 
+            <!-- PASSWORD -->
             <div class="form-group">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('password', this)"></i>
             </div>
 
+            <!-- CONFIRM PASSWORD -->
             <div class="form-group">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('confirm_password', this)"></i>
             </div>
 
             <button type="submit" class="signup-btn">
@@ -57,16 +60,32 @@
 
         </form>
 
-        <div>
+        <div class="extra-links">
             <p>
                 Already have an account?
                 <a href="{% url 'login' %}">Login</a>
-           </p>
+            </p>
         </div>
-
 
     </div>
 </div>
+
+<!-- PASSWORD TOGGLE SCRIPT -->
+<script>
+    function togglePassword(fieldId, icon) {
+        const input = document.getElementById(fieldId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart_checkout.css' %}">
+<div class="cart-container">
+
+    <h1 class="cart-title">Your Cart</h1>
+
+    {% if cart_items %}
+    <div class="cart-wrapper">
+
+        <!-- LEFT: CART ITEMS -->
+        <div class="cart-items">
+
+            {% for item in cart_items %}
+            <div class="cart-item" data-item-id="{{ item.id }}">
+
+                <img src="{{ item.product.image.url }}"
+                     class="cart-item-img"
+                     alt="{{ item.product.name }}">
+
+                <div class="item-info">
+                    <h3>{{ item.product.name }}</h3>
+
+                    <div class="quantity-container">
+                        <button class="quantity-btn decrease">−</button>
+                        <input type="text" class="quantity-input" value="{{ item.quantity }}" readonly>
+                        <button class="quantity-btn increase">+</button>
+                    </div>
+
+                        <p class="item-total">₹{{ item.item_total }}</p>
+                </div>
+
+                <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">
+                    Remove
+                </a>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- RIGHT: BILL SUMMARY -->
+        <div class="bill-summary">
+
+            <h3>Bill Details</h3>
+
+            <div class="bill-row">
+                <span>Items Total</span>
+                <span id="subtotal">₹{{ subtotal }}</span>
+            </div>
+
+            <div class="bill-row">
+                <span>GST (5%)</span>
+                <span id="gst">₹{{ gst }}</span>
+            </div>
+
+            <div class="bill-row">
+                <span>Delivery Charges</span>
+                <span id="delivery_charge">₹{{ delivery_charge }}</span>
+            </div>
+
+            <hr>
+
+            <div class="bill-row total">
+                <span>Total Amount</span>
+                <span id="total">₹{{ total }}</span>
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="address-box">
+                <div class="address-header">
+                    <h4>Delivery Address</h4>
+                    <a href="javascript:void(0)" class="change-btn" onclick="enableEdit()">
+                        Change
+                    </a>
+                </div>
+
+                <form method="POST" action="{% url 'save_address' %}">
+                    {% csrf_token %}
+
+                    <textarea id="deliveryAddress"
+                              name="address"
+                              {% if saved_address %}readonly{% endif %}
+                              placeholder="Enter your delivery address...">{{ saved_address }}</textarea>
+
+                    <button type="submit" class="save-address-btn">
+                        Save Address
+                    </button>
+                </form>
+            </div>
+
+            <a href="{% url 'checkout' %}" class="continue-btn">Continue</a>
+
+        </div>
+
+    </div>
+
+    {% else %}
+        <p class="empty-cart">Your cart is empty 🛒</p>
+    {% endif %}
+
+</div>
+
+<script>
+    function enableEdit() {
+        const box = document.getElementById("deliveryAddress");
+        box.removeAttribute("readonly");
+        box.value = "";
+        box.focus();
+    }
+
+    // Quantity buttons
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const decreaseBtn = item.querySelector('.decrease');
+        const increaseBtn = item.querySelector('.increase');
+        const quantityInput = item.querySelector('.quantity-input');
+        const itemTotal = item.querySelector('.item-total');
+
+        const itemId = item.getAttribute('data-item-id');
+
+        decreaseBtn.addEventListener('click', () => updateQuantity(-1));
+        increaseBtn.addEventListener('click', () => updateQuantity(1));
+
+        function updateQuantity(change) {
+            let currentQty = parseInt(quantityInput.value);
+            let newQty = currentQty + change;
+            if (newQty < 1) return;
+
+            fetch(`/update-cart/${itemId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ quantity: newQty })
+            })
+            .then(response => response.json())
+            .then(data => {
+                quantityInput.value = data.quantity;
+                itemTotal.textContent = `₹${data.item_total}`;
+                document.getElementById('subtotal').textContent = `₹${data.subtotal}`;
+                document.getElementById('gst').textContent = `₹${data.gst}`;
+                document.getElementById('delivery_charge').textContent = `₹${data.delivery_charge}`;
+                document.getElementById('total').textContent = `₹${data.total}`;
+            });
+        }
+    });
+</script>
+
+{% endblock %}

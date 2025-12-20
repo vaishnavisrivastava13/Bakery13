@@ -8,27 +8,22 @@
 
 /* BACKGROUND */
 body {
-    background: linear-gradient(135deg, #fbd3e9, #f9a8d4);
     min-height: 100vh;
+    background: linear-gradient(135deg, #ffe0e9, #fff5f8);
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-/* WRAPPER */
-.login-wrapper {
-    width: 100%;
-    padding: 20px;
+    align-items: center;
 }
 
 /* CARD */
 .login-card {
+    width: 100%;
     max-width: 400px;
-    margin: auto;
-    background: #ffffff;
+    background: #fff;
     padding: 40px 30px;
     border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border: 1px solid #ffd6e2;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     text-align: center;
 }
 
@@ -41,7 +36,17 @@ body {
 
 .login-card p {
     color: #777;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+/* ERROR MESSAGE */
+.error {
+    background: #ffe6eb;
+    color: #d81b60;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
 /* INPUT GROUP */
@@ -50,68 +55,33 @@ body {
     margin-bottom: 18px;
 }
 
-.form-group i {
+/* LEFT ICON */
+.form-group i.fa-user,
+.form-group i.fa-lock {
     position: absolute;
     top: 50%;
-    left: 14px;
+    left: 16px;
     transform: translateY(-50%);
     color: #e91e63;
+    font-size: 15px;
 }
 
+/* INPUT */
 .form-group input {
-    width: 80%;
-    padding: 12px 12px 12px 42px;
+    width: 100%;
+    padding: 12px 52px 12px 45px; /* space for eye icon */
     border-radius: 30px;
-    border: 1px solid #f2b6c6;
+    border: 1px solid #f3b5c8;
     outline: none;
     font-size: 14px;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group input:hover {
     border-color: #e91e63;
 }
 
-/* BUTTON */
-.login-btn {
-    width: 100%;
-    padding: 12px;
-    background: #e91e63;
-    border: none;
-    border-radius: 30px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.login-btn:hover {
-    background: #d81b60;
-}
-
-/* LINKS */
-.extra-links {
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-.extra-links a {
-    color: #e91e63;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.extra-links a:hover {
-    text-decoration: underline;
-}
-
-/* RESPONSIVE */
-@media (max-width: 480px) {
-    .login-card {
-        padding: 30px 20px;
-    }
-}
-
+/* EYE TOGGLER */
 .toggle-password {
     position: absolute;
     right: 18px;
@@ -119,15 +89,64 @@ body {
     transform: translateY(-50%);
     color: #e91e63;
     cursor: pointer;
+    font-size: 16px;
+    z-index: 2;
 }
 
+/* BUTTON */
+.login-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #e91e63, #ff5f8d);
+    border: none;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+}
+
+/* LINKS */
 .forgot-password {
     margin-top: 12px;
     font-size: 14px;
 }
 
-.forgot-password a {
+.forgot-password a,
+.bottom-text a {
     color: #e91e63;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+}
+
+.bottom-text {
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+    100% { transform: translateX(0); }
+}
+
+.login-card.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
 }

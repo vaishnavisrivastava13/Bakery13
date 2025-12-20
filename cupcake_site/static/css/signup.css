@@ -50,17 +50,22 @@ body {
     margin-bottom: 18px;
 }
 
-.form-group i {
+/* LEFT ICON */
+.form-group i.fa-user,
+.form-group i.fa-envelope,
+.form-group i.fa-lock {
     position: absolute;
     top: 50%;
     left: 14px;
     transform: translateY(-50%);
     color: #e91e63;
+    font-size: 15px;
 }
 
+/* INPUT */
 .form-group input {
     width: 100%;
-    padding: 12px 12px 12px 42px;
+    padding: 12px 48px 12px 42px; /* space for eye icon */
     border-radius: 30px;
     border: 1px solid #f2b6c6;
     outline: none;
@@ -69,6 +74,17 @@ body {
 
 .form-group input:focus {
     border-color: #e91e63;
+}
+
+/* EYE TOGGLER */
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e91e63;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /* BUTTON */

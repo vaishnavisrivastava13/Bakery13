@@ -1,28 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Cakes | Sweets Cupcake{% endblock %}
+{% block title %}Beverages | Sweets Cupcake{% endblock %}
 
 {% block content %}
-<section class="cake-section">
-    <h1>Our Cakes</h1>
-    <p>Freshly baked cakes for every celebration 🎂</p>
+<div class="container my-4">
 
-    <!-- Example cake items -->
-    <div class="cake-list">
-        <div class="cake-card">
-            <h3>Chocolate Cake</h3>
-            <p>Rich & creamy chocolate delight</p>
-        </div>
+  <h2 class="fw-bold">Beverages</h2>
+  <p class="text-muted">Home › Beverages</p>
 
-        <div class="cake-card">
-            <h3>Vanilla Cake</h3>
-            <p>Classic vanilla with smooth frosting</p>
-        </div>
+  <div class="filter-bar d-flex justify-content-between align-items-center p-3 mb-4 rounded shadow-sm">
+    <h4 class="mb-0">
+      Beverages
+      <span class="text-muted fs-6">
+        ({{ beverages.paginator.count }} items)
+      </span>
+    </h4>
+  </div>
 
-        <div class="cake-card">
-            <h3>Red Velvet Cake</h3>
-            <p>Soft, moist & delicious</p>
-        </div>
+  <div class="row g-4">
+
+    {% for beverage in beverages %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+      <div class="cake-card position-relative">
+
+        {% if beverage.is_best_seller %}
+        <span class="badge best-seller">Best Seller</span>
+        {% endif %}
+
+        <a href="{% url 'beverage_detail' beverage.id %}" class="cake-link">
+
+          <img src="{{ beverage.image.url }}" alt="{{ beverage.name }}">
+
+          <h6 class="cake-name">{{ beverage.name }}</h6>
+
+          <p class="cake-price">₹{{ beverage.price }}</p>
+
+        </a>
+
+      </div>
+
     </div>
-</section>
+    {% endfor %}
+
+  </div>
+
+  <!-- Pagination -->
+  <nav class="mt-5">
+    <ul class="pagination justify-content-center">
+
+      {% if beverages.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ beverages.previous_page_number }}">Previous</a>
+      </li>
+      {% endif %}
+
+      <li class="page-item active">
+        <span class="page-link">{{ beverages.number }}</span>
+      </li>
+
+      {% if beverages.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ beverages.next_page_number }}">Next</a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </nav>
+
+</div>
 {% endblock %}

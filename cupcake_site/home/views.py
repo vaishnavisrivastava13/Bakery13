@@ -1,59 +1,113 @@
 import requests
 import random
+import time
+
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
+from django.db.models import Q
+
 from .models import Profile
-import time
+from beverages.models import Beverage
+from dessert.models import Dessert
+from cupcakes.models import Cupcake
+from cakes.models import Cake
+from gift.models import Gift
 
 
+# =========================
 # HOME PAGE
+# =========================
 def home_page(request):
     return render(request, 'home.html', {'active_menu': 'home'})
 
 
+# =========================
+# SEARCH (GLOBAL SEARCH)
+# =========================
+def search(request):
+    query = request.GET.get('q')
 
-# =========================
-# SIGNUP (PHONE NUMBER)
-# =========================
+    beverages = []
+    desserts = []
+    cupcakes = []
+    cakes = []
+    gifts = []
+
+    if query:
+        beverages = Beverage.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+        desserts = Dessert.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+        cupcakes = Cupcake.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+        cakes = Cake.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+        gifts = Gift.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+    return render(request, 'search_results.html', {
+        'query': query,
+        'beverages': beverages,
+        'desserts': desserts,
+        'cupcakes': cupcakes,
+        'cakes': cakes,
+        'gifts': gifts,
+    })
+
+
+
+# SIGNUP
 def signup(request):
     if request.method == "POST":
-        username = request.POST.get('username')
-        phone = request.POST.get('phone')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        username = request.POST.get("username")
+        phone = request.POST.get("phone")
+        password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
 
-        if password1 != password2:
+        # PASSWORD CHECK
+        if password != confirm_password:
             messages.error(request, "Passwords do not match")
-            return redirect('signup')
+            return redirect("signup")
 
+        # USER EXISTS CHECK
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")
-            return redirect('signup')
+            return redirect("signup")
 
-        if Profile.objects.filter(phone=phone).exists():
-            messages.error(request, "Phone number already registered")
-            return redirect('signup')
-
-        user = User.objects.create_user(
+        # CREATE USER
+        User.objects.create_user(
             username=username,
-            password=password1
+            password=password
         )
 
-        Profile.objects.create(
-            user=user,
-            phone=phone
-        )
+        # AUTHENTICATE & LOGIN
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, "Account created successful 🎉")
 
-        messages.success(request, "Signup successful. Please login.")
-        return redirect('login')
+        # REDIRECT TO HOME
+        return redirect("home")
 
-    return render(request, 'signup.html')
-
-
+    return render(request, "signup.html")
 # =========================
 # LOGIN
 # =========================
@@ -66,7 +120,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, f"Welcome {username}")
+            messages.success(request, f"Welcome back {username} 🍰")
             return redirect('home')
         else:
             messages.error(request, "Invalid username or password")
@@ -108,7 +162,7 @@ def save_location(request):
 
 
 # =========================
-# FORGOT PASSWORD (OTP)
+# FORGOT PASSWORD
 # =========================
 def forgot_password(request):
     if request.method == "POST":
@@ -124,7 +178,7 @@ def forgot_password(request):
             request.session['reset_user'] = user.id
             request.session['otp_time'] = time.time()
 
-            print(f"OTP for {phone} is:", otp)  # SMS later
+            print(f"OTP for {phone} is:", otp)
 
             return redirect('verify_otp')
 
@@ -133,8 +187,9 @@ def forgot_password(request):
 
     return render(request, 'forgot_password.html')
 
+
 # =========================
-# VERIFY OTP & RESET PASSWORD
+# VERIFY OTP
 # =========================
 def verify_otp(request):
     if request.method == "POST":
@@ -148,7 +203,6 @@ def verify_otp(request):
             messages.error(request, "OTP expired. Please try again.")
             return redirect('forgot_password')
 
-        # check expiry (2 minutes = 120 seconds)
         if time.time() - otp_time > 120:
             request.session.flush()
             messages.error(request, "OTP expired. Please generate a new one.")
@@ -159,7 +213,6 @@ def verify_otp(request):
             user.password = make_password(new_password)
             user.save()
 
-            # clear session after success
             request.session.flush()
 
             messages.success(request, "Password reset successful. Please login.")
@@ -168,9 +221,3 @@ def verify_otp(request):
             messages.error(request, "Invalid OTP")
 
     return render(request, 'verify_otp.html')
-
-
-
-
-
-

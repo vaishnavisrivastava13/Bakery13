@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ dessert.name }} | Dessert{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <img src="{{ dessert.image.url }}" class="img-fluid rounded shadow">
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="fw-bold">{{ dessert.name }}</h2>
+      <p class="fs-4 text-danger">₹{{ dessert.price }}</p>
+
+      <p class="text-muted">
+        ⭐ {{ dessert.rating }} / 5
+      </p>
+
+      <p>{{ dessert.description }}</p>
+
+      <a href="{% url 'add_to_cart' 'dessert' dessert.id %}" class="add-cart-btn">
+          <i class="fa-solid fa-cart-plus"></i>
+          Add to Cart
+      </a>
+
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

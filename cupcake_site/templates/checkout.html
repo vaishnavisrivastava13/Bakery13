@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart_checkout.css' %}">
+
+<div class="checkout-container">
+
+    <h1>Checkout</h1>
+
+    <div class="checkout-wrapper">
+
+        <!-- LEFT: ORDER SUMMARY -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+
+            {% if cart_items %}
+                {% for item in cart_items %}
+                <div class="summary-item">
+                    <div>
+                        <strong>{{ item.name }}</strong><br>
+                        <small>₹{{ item.price }} × {{ item.quantity }}</small>
+                    </div>
+                    <div>
+                        ₹{{ item.total }}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <hr>
+
+                <div class="summary-total">
+                    <strong>Grand Total</strong>
+                    <strong>₹{{ total_price }}</strong>
+                </div>
+            {% else %}
+                <p>Your cart is empty.</p>
+            {% endif %}
+        </div>
+
+
+        <!-- RIGHT: PAYMENT -->
+        <div class="payment-box">
+            <h2>Payment Method</h2>
+
+            <form id="checkoutForm" method="post">
+                {% csrf_token %}
+
+                {{ form.payment_method }}
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-success"
+                        onclick="openModal()"
+                        id="placeOrderBtn"
+                        disabled>
+                    Place Order
+                </button>
+
+            </form>
+
+            <!-- CONFIRM ORDER MODAL -->
+            <div id="confirmModal" class="modal-overlay">
+                <div class="modal-box">
+                    <h3>Confirm Order</h3>
+                    <p>Do you want to confirm your order?</p>
+
+                     <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="closeModal()">No</button>
+                        <button class="btn btn-success" onclick="submitOrder()">Yes</button>
+                     </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- CONFIRM POPUP -->
+<script>
+function openModal() {
+    document.getElementById("confirmModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("confirmModal").style.display = "none";
+}
+
+function submitOrder() {
+    document.getElementById("checkoutForm").submit();
+}
+
+// Enable button when payment selected
+const radios = document.querySelectorAll('input[name="payment_method"]');
+const btn = document.getElementById('placeOrderBtn');
+
+radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+        btn.disabled = false;
+    });
+});
+</script>
+
+
+{% endblock %}

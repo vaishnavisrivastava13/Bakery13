@@ -29,17 +29,12 @@
         <span class="badge best-seller">Best Seller</span>
         {% endif %}
 
-        <!-- Wishlist Heart -->
-        <span class="wishlist"
-          data-id="{{ cake.id }}">
-          <i class="far fa-heart"></i>
-        </span>
-
 
         <!-- Clickable Cake -->
         <a href="{% url 'cake_detail' cake.id %}" class="cake-link">
           <img src="{{ cake.image.url }}" alt="{{ cake.name }}">
           <h6 class="cake-name">{{ cake.name }}</h6>
+          <p class="cake-price">₹{{ cake.price }}</p>
         </a>
 
       </div>
@@ -74,9 +69,6 @@
 
 </div>
 
-<!-- Wishlist Toast -->
-<div id="wishlist-toast" class="wishlist-toast">
-  Item successfully added to wishlist
-</div>
+
 
 {% endblock %}

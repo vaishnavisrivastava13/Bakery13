@@ -1,0 +1,353 @@
+body {
+    background: #fff6f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    color: #c2185b;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #f3c1d4;
+    margin: 15px 0;
+}
+
+button {
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* CART PAGE */
+
+.cart-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.cart-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cart-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+/* Cart Items */
+.cart-items {
+    width: 65%;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.18);
+}
+
+.cart-item-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.item-info h3 {
+    margin-bottom: 10px;
+}
+
+/* Quantity Buttons */
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ff5fa2;
+    color: #fff;
+    font-size: 18px;
+}
+
+.quantity-input {
+    width: 42px;
+    text-align: center;
+    border: none;
+    font-weight: 600;
+}
+
+.item-total {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* Remove */
+.remove-btn {
+    margin-left: auto;
+    color: #ff4081;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.remove-btn:hover {
+    text-decoration: underline;
+}
+
+/* BILL SUMMARY */
+
+.bill-summary {
+    width: 35%;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(255, 105, 180, 0.22);
+}
+
+.bill-summary h3 {
+    margin-bottom: 20px;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.bill-row.total {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ADDRESS */
+
+.address-box {
+    background: #fff0f6;
+    border-radius: 16px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.address-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.change-btn {
+    color: #ff4081;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #f3c1d4;
+    resize: none;
+}
+
+.save-address-btn {
+    background: #ff5fa2;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+/* Continue */
+.continue-btn {
+    display: block;
+    background: linear-gradient(45deg, #ff5fa2, #ff80ab);
+    color: #fff;
+    text-align: center;
+    padding: 14px;
+    border-radius: 30px;
+    margin-top: 25px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* CHECKOUT PAGE */
+
+.checkout-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.checkout-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+/* Order Summary */
+.order-summary {
+    width: 55%;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(255, 105, 180, 0.22);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.summary-item small {
+    color: #777;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Payment */
+.payment-box {
+    width: 45%;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(255, 105, 180, 0.22);
+}
+
+.payment-box label {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.payment-box input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Place Order */
+.btn-success {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff5fa2, #ff80ab);
+    color: #fff;
+}
+
+button:disabled {
+    background: #f3c1d4;
+    cursor: not-allowed;
+}
+
+/* CONFIRM YES OR NO */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* EMPTY CART */
+
+.empty-cart {
+    text-align: center;
+    font-size: 18px;
+    color: #ff4081;
+}
+
+
+/* Cart Item Hover */
+.cart-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(255, 105, 180, 0.35);
+}
+
+/* Quantity Button Hover */
+.quantity-btn {
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    background: #ff4081;
+}
+
+/* Remove Button Hover */
+.remove-btn {
+    transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+    color: #c2185b;
+}
+
+/* Continue Button Hover */
+.continue-btn {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.continue-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(255, 105, 180, 0.4);
+}
+
+/* Checkout Cards Hover */
+.order-summary,
+.payment-box,
+.bill-summary {
+    transition: transform 0.3s ease;
+}
+
+.order-summary:hover,
+.payment-box:hover,
+.bill-summary:hover {
+    transform: translateY(-5px);
+}
+
+/* Place Order Button Hover */
+.btn-success {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-success:hover:enabled {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(255, 105, 180, 0.5);
+}

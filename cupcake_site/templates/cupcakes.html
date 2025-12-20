@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>hello</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cupcakes | Sweets Cupcake{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <!-- Page Heading -->
+  <h2 class="fw-bold">Cupcakes</h2>
+  <p class="text-muted">Home › Cupcakes</p>
+
+  <!-- Filter Bar (COUNT) -->
+  <div class="filter-bar d-flex justify-content-between align-items-center p-3 mb-4 rounded shadow-sm">
+    <h4 class="mb-0">
+      Cupcakes
+      <span class="text-muted fs-6">
+        ({{ cupcakes.paginator.count }} items)
+      </span>
+    </h4>
+  </div>
+
+  <!-- Cupcake Grid -->
+  <div class="row g-4">
+
+    {% for cupcake in cupcakes %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+
+      <div class="cake-card position-relative">
+
+        <!-- Best Seller Badge -->
+        {% if cupcake.is_best_seller %}
+        <span class="badge best-seller">Best Seller</span>
+        {% endif %}
+
+        <!-- Clickable Cupcake Card -->
+        <a href="{% url 'cupcake_detail' cupcake.id %}" class="cake-link">
+
+          <img src="{{ cupcake.image.url }}" alt="{{ cupcake.name }}">
+
+          <h6 class="cake-name">
+            {{ cupcake.name }}
+          </h6>
+
+          <p class="cake-price">
+            ₹{{ cupcake.price }}
+          </p>
+
+        </a>
+
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            {% if cupcakes.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ cupcakes.previous_page_number }}">Previous</a>
+            </li>
+            {% endif %}
+
+            <li class="page-item active">
+              <span class="page-link">{{ cupcakes.number }}</span>
+            </li>
+
+            {% if cupcakes.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ cupcakes.next_page_number }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+</div>
+{% endblock %}

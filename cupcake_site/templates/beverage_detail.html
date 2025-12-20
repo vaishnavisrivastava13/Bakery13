@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ beverage.name }} | Beverages{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <img src="{{ beverage.image.url }}" class="img-fluid rounded shadow" alt="{{ beverage.name }}">
+    </div>
+
+    <div class="col-md-6">
+
+      <h2 class="fw-bold">{{ beverage.name }}</h2>
+
+      <p class="fs-4 text-success">₹{{ beverage.price }}</p>
+
+      <p class="text-muted">{{ beverage.description }}</p>
+
+      <p>
+        ⭐ {{ beverage.rating }} / 5
+      </p>
+
+      <a href="{% url 'add_to_cart' 'beverage' beverage.id %}" class="add-cart-btn">
+          <i class="fa-solid fa-cart-plus"></i>
+          Add to Cart
+      </a>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

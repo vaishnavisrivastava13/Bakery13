@@ -5,155 +5,65 @@
     <meta charset="UTF-8">
     <title>Login | Sweets Cupcake</title>
 
-    <!-- Google Font -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .login-card {
-            background: #fff;
-            width: 380px;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            text-align: center;
-        }
-
-        .login-card h2 {
-            font-family: 'Pacifico', cursive;
-            color: #e91e63;
-            margin-bottom: 10px;
-        }
-
-        .login-card p {
-            color: #777;
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .input-group i {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: #e91e63;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px 12px 45px;
-            border-radius: 30px;
-            border: 1px solid #f3b5c8;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .input-group input:focus {
-            border-color: #e91e63;
-        }
-
-        .login-btn {
-            width: 100%;
-            background: #e91e63;
-            border: none;
-            color: #fff;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #d81b60;
-        }
-
-        .bottom-text {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .bottom-text a {
-            color: #e91e63;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
 
-    <form method="POST" class="login-card">
-        {% csrf_token %}
+<form method="POST" class="login-card {% if messages %}shake{% endif %}">
+    {% csrf_token %}
 
-        <h2>Welcome Back 🍰</h2>
-        <p>Login to continue sweetness</p>
+    <h2>Welcome Back 🍰</h2>
+    <p>Login to continue sweetness</p>
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="error">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
 
-        <div class="input-group">
-            <i class="fa-solid fa-user"></i>
-            <input type="text" name="username" placeholder="Username" required>
-        </div>
+    <div class="form-group">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" name="username" placeholder="Username" required>
+    </div>
 
-        <div class="input-group">
-            <i class="fa-solid fa-lock"></i>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()"></i>
-        </div>
+    <!-- PASSWORD -->
+    <div class="form-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <i class="fa-solid fa-eye toggle-password"
+           onclick="togglePassword('password', this)"></i>
+    </div>
 
+    <button type="submit" class="login-btn">Login</button>
 
-        <button type="submit" class="login-btn">Login</button>
+    <div class="forgot-password">
+        <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+    </div>
 
-        <div class="forgot-password">
-           <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+    <div class="bottom-text">
+        Don’t have an account?
+        <a href="{% url 'signup' %}">Signup</a>
+    </div>
+</form>
 
-        </div>
-
-
-        <div class="bottom-text">
-            Don’t have an account?
-            <a href="{% url 'signup' %}">Signup</a>
-        </div>
-    </form>
-
+<!-- PASSWORD TOGGLE SCRIPT -->
 <script>
-    function togglePassword() {
-        const password = document.getElementById("password");
-        const icon = document.querySelector(".toggle-password");
+    function togglePassword(fieldId, icon) {
+        const input = document.getElementById(fieldId);
 
-        if (password.type === "password") {
-            password.type = "text";
+        if (input.type === "password") {
+            input.type = "text";
             icon.classList.remove("fa-eye");
             icon.classList.add("fa-eye-slash");
         } else {
-            password.type = "password";
+            input.type = "password";
             icon.classList.remove("fa-eye-slash");
             icon.classList.add("fa-eye");
         }

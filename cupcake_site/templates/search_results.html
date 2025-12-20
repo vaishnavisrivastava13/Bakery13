@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="search-container">
+
+    <h2 class="mb-4">
+        Search Results for
+        <span class="text-primary">"{{ query }}"</span>
+    </h2>
+
+    <!-- ================= BEVERAGES ================= -->
+    {% if beverages %}
+    <h3 class="search-heading">☕ Beverages</h3>
+    <div class="search-grid">
+        {% for item in beverages %}
+        <a href="{% url 'beverage_detail' item.id %}" class="search-link">
+            <div class="search-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="search-img">
+                {% endif %}
+
+                <span class="badge beverage">Beverage</span>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatewords:12 }}</p>
+                <p class="price">₹{{ item.price }}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ================= DESSERTS ================= -->
+    {% if desserts %}
+    <h3 class="search-heading">🍰 Desserts</h3>
+    <div class="search-grid">
+        {% for item in desserts %}
+        <a href="{% url 'dessert_detail' item.id %}" class="search-link">
+            <div class="search-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="search-img">
+                {% endif %}
+
+                <span class="badge dessert">Dessert</span>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatewords:12 }}</p>
+                <p class="price">₹{{ item.price }}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ================= CAKES ================= -->
+    {% if cakes %}
+    <h3 class="search-heading">🎂 Cakes</h3>
+    <div class="search-grid">
+        {% for item in cakes %}
+        <a href="{% url 'cake_detail' item.id %}" class="search-link">
+            <div class="search-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="search-img">
+                {% endif %}
+
+                <span class="badge cake">Cake</span>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatewords:12 }}</p>
+                <p class="price">₹{{ item.price }}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ================= CUPCAKES ================= -->
+    {% if cupcakes %}
+    <h3 class="search-heading">🧁 Cupcakes</h3>
+    <div class="search-grid">
+        {% for item in cupcakes %}
+        <a href="{% url 'cupcake_detail' item.id %}" class="search-link">
+            <div class="search-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="search-img">
+                {% endif %}
+
+                <span class="badge cupcake">Cupcake</span>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatewords:12 }}</p>
+                <p class="price">₹{{ item.price }}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ================= GIFTS ================= -->
+    {% if gifts %}
+    <h3 class="search-heading">🎁 Gifts</h3>
+    <div class="search-grid">
+        {% for item in gifts %}
+        <a href="{% url 'gift_detail' item.id %}" class="search-link">
+            <div class="search-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="search-img">
+                {% endif %}
+
+                <span class="badge gift">Gift</span>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description|truncatewords:12 }}</p>
+                <p class="price">₹{{ item.price }}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if not beverages and not desserts and not cakes and not cupcakes and not gifts %}
+        <p class="no-results">No items found 😢</p>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -22,9 +22,12 @@
 
       <p>{{ cake.description }}</p>
 
-      <button class="btn btn-pink btn-lg mt-3">
-        Add to Cart
-      </button>
+      <a href="{% url 'add_to_cart' 'cake' cake.id %}" class="add-cart-btn">
+          <i class="fa-solid fa-cart-plus"></i>
+          Add to Cart
+      </a>
+
+
     </div>
 
   </div>

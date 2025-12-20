@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ gift.name }} | Gift{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <img src="{{ gift.image.url }}" class="img-fluid rounded shadow">
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="fw-bold">{{ gift.name }}</h2>
+      <p class="fs-4 text-danger">₹{{ gift.price }}</p>
+
+      <p class="text-muted">
+        ⭐ {{ gift.rating }} / 5
+      </p>
+
+      <p>{{ gift.description }}</p>
+
+      <a href="{% url 'add_to_cart' 'gift' gift.id %}" class="add-cart-btn">
+          <i class="fa-solid fa-cart-plus"></i>
+          Add to Cart
+      </a>
+
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

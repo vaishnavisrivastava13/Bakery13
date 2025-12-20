@@ -1,21 +1,19 @@
 /* Cake Card */
-.cake-card {
-  background: #fff;
-  border-radius: 18px;
-  padding-bottom: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: 0.3s ease;
-  overflow: hidden;
+cake-card {
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .cake-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 14px 35px rgba(255, 77, 109, 0.25)
 }
 
 /* Cake Link */
 .cake-link {
   text-decoration: none;
   color: inherit;
+  display: block;
 }
 
 /* Image */
@@ -23,6 +21,7 @@
   width: 100%;
   height: 220px;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
 /* Cake Name */
@@ -38,105 +37,18 @@
   top: 10px;
   left: 10px;
   background: #ff4d6d;
+  color: #fff;
   font-size: 11px;
   padding: 5px 8px;
   border-radius: 6px;
+  z-index: 3;
 }
 
-/* Wishlist */
-.wishlist {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.wishlist i {
-  font-size: 20px;
-  color: #999;
-  transition: 0.3s;
-}
-
-.wishlist i.active-heart {
-  color: red;
-}
-
-
-.wishlist.active i {
-  color: #ff1e56;
-}
-
-/* Toast Message */
-.wishlist-toast {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #ff4d6d;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 14px;
-  display: none;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-}
-
-/* -------------------------------
-   Card Hover Micro Interaction
---------------------------------*/
-.cake-card {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.cake-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 14px 35px rgba(255, 77, 109, 0.25);
-}
-
-/* Image subtle zoom */
-.cake-card img {
-  transition: transform 0.4s ease;
-}
 
 .cake-card:hover img {
   transform: scale(1.05);
 }
 
-/* -------------------------------
-   Wishlist Heart Animation
---------------------------------*/
-.wishlist i {
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.wishlist.active i {
-  color: #ff1e56;
-  animation: heart-pop 0.45s ease;
-}
-
-@keyframes heart-pop {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.4); }
-  70% { transform: scale(0.9); }
-  100% { transform: scale(1); }
-}
-
-/* -------------------------------
-   Toast Slide Animation
---------------------------------*/
-.wishlist-toast {
-  animation: slideUp 0.4s ease forwards;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
 /* -------------------------------
    Click Feedback (Tap Effect)
@@ -144,3 +56,55 @@
 .cake-card:active {
   transform: scale(0.98);
 }
+
+/* ===============================
+   CAKE PRICE
+================================*/
+.cake-price {
+  text-align: center;
+  font-weight: 600;
+  color: #ff4d6d;
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-size: 15px;
+  display: block;
+}
+
+/* ================= ADD TO CART BUTTON ================= */
+.add-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 28px;
+    margin-top: 20px;
+
+    background: linear-gradient(135deg, #ff4d6d, #e63946);
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(230, 57, 70, 0.35);
+
+    transition: all 0.3s ease;
+}
+
+.add-cart-btn i {
+    font-size: 18px;
+}
+
+/* Hover effect */
+.add-cart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(230, 57, 70, 0.5);
+    background: linear-gradient(135deg, #e63946, #ff4d6d);
+}
+
+/* Click effect */
+.add-cart-btn:active {
+    transform: scale(0.96);
+}
+
